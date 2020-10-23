@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo da velha</title>
+    <link rel="stylesheet" type="text/css" href="static/css/estilo.css" />
+</head>
+<body>
+    <div id="container">
+        <div id="bt_iniciar" class="botao" onclick="comecaJogada();">COMEÇAR JOGO!</div>
+
+
+        <div id="menu">
+            <div><b>ID do Jogo:</b> <span class="id_jogo"></span></div>
+            <div><b>Vez do jogador:</b> <span class="jogador_atual"></span></div>
+        </div>
+        <table id="tabuleiro">
+            <tr>
+                <td x="2" y="0" onclick="realizaJogada(this);"></td>
+                <td x="2" y="1" onclick="realizaJogada(this);"></td>
+                <td x="2" y="2" onclick="realizaJogada(this);"></td>
+            </tr>
+            </tr>
+                <td x="1" y="0" onclick="realizaJogada(this);"></td>
+                <td x="1" y="1" onclick="realizaJogada(this);"></td>
+                <td x="1" y="2" onclick="realizaJogada(this);"></td>
+            </tr>
+            <tr>
+                <td x="0" y="0" onclick="realizaJogada(this);"></td>
+                <td x="0" y="1" onclick="realizaJogada(this);"></td>
+                <td x="0" y="2" onclick="realizaJogada(this);"></td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+<script src="static/js/funcoes.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</html>
