@@ -48,6 +48,17 @@ Na pasta do projeto, ativar o ambiente virtual como explicado acima e utilizar o
 
 
 Após a execução do comando acima algumas informações apareceram no terminal mostrando que a aplicação foi iniciada.
+As informações devem ser parecidas com as informações abaixo:
+ * (venv) λ python main.py
+ * Serving Flask app "jogo_velha" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 209-542-029
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
 
 Para acessar a aplicação, basta abrir um navegador e acessar a URL na qual o projeto está rodando.
