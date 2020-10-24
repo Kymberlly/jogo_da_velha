@@ -14,16 +14,18 @@ def game(id=None):
     if not id:
         global partida
         partida = JogoDaVelha()
+        partida.dadosPartida()
         return jsonify(partida.iniciar_partida()), 200
 
-    requests = request.json if request.json else request.form
+    req = request.get_json()
+    print('\nDADOS', req, '\n\n')
 
-    id = requests.get('id', None)
-    player = requests.get('player', None)
-    posX = int(requests.get('position[x]', None))
-    posY = int(requests.get('position[y]', None))
+    id = req.get('id', None)
+    player = req.get('player', None)
+    position = req.get('position', {})
 
-    return jsonify(partida.realiza_jogada(id, player, posX, posY)), 200
+    print('QUASE NO RETURN')
+    return jsonify(partida.realiza_jogada(id, player, position)), 200
 
 
 if __name__ == '__main__':

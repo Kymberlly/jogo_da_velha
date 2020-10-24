@@ -9,8 +9,10 @@ function jogadorAtual(jogador1){
 }
 
 function comecaJogada(){
-//    $('#bt_iniciar').css('display', 'none');
-    $('#tabuleiro, #menu').css('display', 'block');
+    partida = 0;
+    $('#bt_iniciar').css('display', 'none');
+    $('#tabuleiro, #menu').css('display', 'flex');
+    $('#tabuleiro tr td').removeClass().css("pointer-events", "auto");
 
     $.ajax({
         url: '/game',
@@ -21,7 +23,17 @@ function comecaJogada(){
 
         $('.id_jogo').html(id_partida);
         $('.jogador_atual').html(jogador1);
+
+    }).fail((retorno) => {
+        alert('Falha ao iniciar partida, tente novamente!');
     });
+}
+
+function marcaJogada(jObj, player){
+    partida++;
+    classeQuadro = player == 'X' ? 'marcaX' : 'marcaO';
+    $('.jogador_atual').html(player == 'X' ? 'O' : 'X');
+    jObj.css("pointer-events", "none").addClass(classeQuadro);
 }
 
 function realizaJogada(obj){
@@ -36,24 +48,29 @@ function realizaJogada(obj){
 
     $.ajax({
         url: `/game/${id_partida}/movement`,
-        data: data,
         dataType:'json',
         type:'POST',
+        headers:{'Content-Type': 'application/json'},
+        data: JSON.stringify(data)
     }).done((retorno) => {
-        partida++;
-        classeQuadro = player == 'X' ? 'marcaX' : 'marcaO';
-        $('.jogador_atual').html(player == 'X' ? 'O' : 'X');
-        jObj.prop('onclick', null).addClass(classeQuadro);
+        if(retorno.msg)
+            return alert(retorno.msg);
 
+        marcaJogada(jObj, player);
         vencedor = retorno.winner;
         if(vencedor){
-            if(vencedor == 'Draw'){
-                alert('Jogo finalizou em Empate!');
-            }
-            else{
-                alert(`Jogador vencedor: ${retorno.winner}`);
-            }
+            if(vencedor == 'Draw')
+                mensagem = 'Jogo finalizou em Empate!';
+            else
+                mensagem = `Jogador ${vencedor} ganhou o jogo`;
+
+            if(confirm(`${mensagem}. Deseja iniciar uma nova partida?`))
+                comecaJogada();
+            else
+                return
         }
 
+    }).fail((retorno) => {
+        alert('Falha ao realizar jogada, tente novamente!');
     });
 }
