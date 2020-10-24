@@ -43,8 +43,7 @@ Após a ativação instalar as dependências do projeto encontradas no arquivo r
 Para inicializar a aplicação, é necessário abrir o terminal e ir até a pasta do projeto.
 
 
-Na pasta do projeto, ativar o ambiente virtual como explicado acima e utilizar o comando:
-`python main.py`
+Na pasta do projeto, ativar o ambiente virtual como explicado acima e utilizar o comando `python main.py` para executarmos nosso arquivo principal da aplicação.
 
 
 Após a execução do comando acima algumas informações apareceram no terminal mostrando que a aplicação foi iniciada.
