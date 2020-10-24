@@ -28,6 +28,9 @@ td{
 td:last-child{
     border-right:0;
 }
+tr:last-child td{
+    border-bottom:0;
+}
 
 #container{
     display:flex;
@@ -76,8 +79,4 @@ td:last-child{
 }
 .botao:hover{
     background-color:#009100;
-}
-
-tr:last-child td{
-    border-bottom:0;
 }

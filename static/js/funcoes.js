@@ -57,6 +57,7 @@ function realizaJogada(obj){
             return alert(retorno.msg);
 
         marcaJogada(jObj, player);
+
         vencedor = retorno.winner;
         if(vencedor){
             if(vencedor == 'Draw')

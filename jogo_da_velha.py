@@ -9,13 +9,6 @@ class JogoDaVelha():
     def iniciar_partida(self):
         return {"id": self.id, "firstPlayer": self.firstPlayer}
 
-
-    def dadosPartida(self):
-        print(self.id)
-        print(self.firstPlayer)
-        print(self.partida)
-        print(self.tabuleiro)
-
     def sorteia_jogador(self):
         import random
         if random.randrange(0, 10) % 2 == 0:
@@ -33,17 +26,11 @@ class JogoDaVelha():
         return jogador_atual == jogador
 
     def realiza_jogada(self, id_partida, jogador, position):
-        print(id_partida, jogador, position)
         if not self.autentica_partida_atual(id_partida):
             return {'msg': 'Partida não encontrada'}
 
-        print('DEPOIS DE AUTENTICAR JOGADA')
         if not self.autentica_turno_jogador(jogador):
             return {'msg': 'Não é turno do jogador'}
-        print('DEPOIS DE AUTENTICAR JOGADOR')
-
-
-        print('NO REALIZA JOGADA')
 
         self.partida += 1
         posX = int(position.get('x', None))
@@ -55,31 +42,36 @@ class JogoDaVelha():
             num_jogador = 1 if jogador == 'X' else -1
             self.tabuleiro[x][y] = num_jogador
 
-        status_jogo = self.status_jogo(x, y)
-        if not status_jogo:
+        ganhador = self.status_jogo(x, y)
+        if not ganhador:
             return False
-        # MELHORAR
-        return {'winner': status_jogo}
+
+        if ganhador == 3:
+            ganhador = 'X'
+        elif ganhador == -3:
+            ganhador = 'O'
+        else:
+            ganhador = 'Draw'
+
+        return {'status': 'Partida Finalizada', 'winner': ganhador}
 
     def status_jogo(self, x, y):
         tam_tabuleiro = len(self.tabuleiro)
-        horiz = self.verifica_horizontal(x, tam_tabuleiro)
-        vert = self.verifica_vertical(y, tam_tabuleiro)
+        colunas_horizontal = self.verifica_horizontal(x, tam_tabuleiro)
+        colunas_vertical = self.verifica_vertical(y, tam_tabuleiro)
         diagonal_principal, diagonal_secundaria = self.verifica_diagonal(tam_tabuleiro)
 
-        print(horiz, vert, diagonal_principal, diagonal_secundaria)
-
-        if horiz in [3, -3]:
-            return 'X' if horiz == 3 else 'O'
-        if vert in [3, -3]:
-            return 'X' if vert == 3 else 'O'
+        if colunas_horizontal in [3, -3]:
+            return colunas_horizontal
+        if colunas_vertical in [3, -3]:
+            return colunas_vertical
         if diagonal_principal in [3, -3]:
-            return 'X' if diagonal_principal == 3 else 'O'
+            return diagonal_principal
         if diagonal_secundaria in [3, -3]:
-            return 'X' if diagonal_secundaria == 3 else 'O'
+            return diagonal_secundaria
 
         if self.verifica_draw():
-            return 'Draw'
+            return -1
 
         return False
 
