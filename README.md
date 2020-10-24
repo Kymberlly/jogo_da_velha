@@ -39,7 +39,7 @@ Após a ativação instalar as dependências do projeto encontradas no arquivo r
 `pip install -r requirements.txt`
 
 
-# Iniciando a aplicação#
+# Iniciando a aplicação
 Para inicializar a aplicação, é necessário abrir o terminal e ir até a pasta do projeto.
 
 
@@ -51,5 +51,6 @@ Após a execução do comando acima algumas informações apareceram no terminal
 
 
 Para acessar a aplicação, basta abrir um navegador e acessar a URL na qual o projeto está rodando.
+
 *URL encontrada na última linha da mensagem exibida no terminal. A última linha será parecida com esta `* Running on http://0.0.0.0:5000/`*
 
